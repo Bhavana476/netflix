@@ -1,0 +1,173 @@
+{
+  "exchanges": [
+    {
+      "request": {
+        "currentTs": 152,
+        "question": "Who is the character that just walked in?"
+      },
+      "latencyMs": 37,
+      "response": {
+        "questionId": "q_6b7f43d52f",
+        "answer": "That's Frank — the leader of the three rodent bullies, a flying squirrel who can glide between trees (on screen from 00:02:30).",
+        "sourceEvents": [
+          "evt_bbb_009"
+        ],
+        "sources": [
+          {
+            "id": "evt_bbb_009",
+            "type": "character",
+            "ts": 150,
+            "label": "Frank"
+          }
+        ],
+        "explanation": "Drawn from character entry evt_bbb_009 @ 00:02:30.",
+        "grounded": true,
+        "model": "extractive",
+        "latencyMs": 2,
+        "generatedAt": "2026-10-23T14:04:50.914Z"
+      }
+    },
+    {
+      "request": {
+        "currentTs": 75,
+        "question": "What does burrow mean?"
+      },
+      "latencyMs": 19,
+      "response": {
+        "questionId": "q_f2e9f9ec2a",
+        "answer": "\"Burrow\": A hole or tunnel dug by a small animal, such as a rabbit, to live in.",
+        "sourceEvents": [
+          "evt_bbb_005"
+        ],
+        "sources": [
+          {
+            "id": "evt_bbb_005",
+            "type": "glossary",
+            "ts": 70,
+            "label": "Burrow"
+          }
+        ],
+        "explanation": "Drawn from glossary entry evt_bbb_005 @ 00:01:10.",
+        "grounded": true,
+        "model": "extractive",
+        "latencyMs": 1,
+        "generatedAt": "2026-10-23T14:04:50.935Z"
+      }
+    },
+    {
+      "request": {
+        "currentTs": 265,
+        "question": "What happened earlier?"
+      },
+      "latencyMs": 12,
+      "response": {
+        "questionId": "q_5c8e7ab7ad",
+        "answer": "Earlier, at 00:04:20 (\"The last straw\"): The bullies harm one of Bunny's beloved butterflies, and the gentle rabbit finally decides to fight back. Earlier, at 00:02:50 (\"The bullies strike\"): Frank, Rinky and Gimera tease Bunny, throwing fruit and nuts at him from the trees.",
+        "sourceEvents": [
+          "evt_bbb_015",
+          "evt_bbb_012"
+        ],
+        "sources": [
+          {
+            "id": "evt_bbb_015",
+            "type": "scene",
+            "ts": 260,
+            "label": "The last straw"
+          },
+          {
+            "id": "evt_bbb_012",
+            "type": "scene",
+            "ts": 170,
+            "label": "The bullies strike"
+          }
+        ],
+        "explanation": "Drawn from scene entry evt_bbb_015 @ 00:04:20, scene entry evt_bbb_012 @ 00:02:50.",
+        "grounded": true,
+        "model": "extractive",
+        "latencyMs": 1,
+        "generatedAt": "2026-10-23T14:04:50.947Z"
+      }
+    },
+    {
+      "request": {
+        "currentTs": 300,
+        "question": "Who directed this?"
+      },
+      "latencyMs": 23,
+      "response": {
+        "questionId": "q_e22cf6e555",
+        "answer": "The Peach project was directed by Sacha Goedegebure.",
+        "sourceEvents": [
+          "evt_bbb_016"
+        ],
+        "sources": [
+          {
+            "id": "evt_bbb_016",
+            "type": "trivia",
+            "ts": 290,
+            "label": "The Peach project was directed by Sacha Goedegebure."
+          }
+        ],
+        "explanation": "Drawn from trivia entry evt_bbb_016 @ 00:04:50.",
+        "grounded": true,
+        "model": "extractive",
+        "latencyMs": 1,
+        "generatedAt": "2026-10-23T14:04:50.968Z"
+      }
+    },
+    {
+      "request": {
+        "currentTs": 300,
+        "question": "Who won the 1998 World Cup?"
+      },
+      "latencyMs": 14,
+      "response": {
+        "questionId": "q_9ba45e89bc",
+        "answer": "I don't have anything in the Big Buck Bunny metadata up to 00:05:00 that answers that, so I'd rather not guess.",
+        "sourceEvents": [],
+        "sources": [],
+        "grounded": false,
+        "model": "none",
+        "latencyMs": 0,
+        "generatedAt": "2026-10-23T14:04:50.981Z"
+      }
+    }
+  ],
+  "citedEntries": {
+    "evt_bbb_009": {
+      "id": "evt_bbb_009",
+      "ts": 150,
+      "type": "character",
+      "endTs": 560,
+      "text": "Frank watches Bunny from a branch.",
+      "characterId": "c_frank"
+    },
+    "evt_bbb_005": {
+      "id": "evt_bbb_005",
+      "ts": 70,
+      "type": "glossary",
+      "term": "Burrow",
+      "definition": "A hole or tunnel dug by a small animal, such as a rabbit, to live in."
+    },
+    "evt_bbb_015": {
+      "id": "evt_bbb_015",
+      "ts": 260,
+      "type": "scene",
+      "text": "The bullies harm one of Bunny's beloved butterflies, and the gentle rabbit finally decides to fight back.",
+      "title": "The last straw"
+    },
+    "evt_bbb_012": {
+      "id": "evt_bbb_012",
+      "ts": 170,
+      "type": "scene",
+      "text": "Frank, Rinky and Gimera tease Bunny, throwing fruit and nuts at him from the trees.",
+      "title": "The bullies strike"
+    },
+    "evt_bbb_016": {
+      "id": "evt_bbb_016",
+      "ts": 290,
+      "type": "trivia",
+      "text": "The Peach project was directed by Sacha Goedegebure."
+    }
+  }
+}

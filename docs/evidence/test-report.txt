@@ -1,0 +1,109 @@
+PASS tests/roomState.test.js
+  playback state machine
+    √ starts paused at 0 and position does not advance while paused (20 ms)
+    √ play advances the authoritative clock; pause freezes it (5 ms)
+    √ seek keeps play/pause state and moves the position (2 ms)
+    √ buffering halts the clock; seek out of buffering lands paused (2 ms)
+    √ position is clamped to the title duration (1 ms)
+    √ sequence number increases on every transition (1 ms)
+    √ non-host playback updates are rejected (NOT_HOST) (47 ms)
+    √ invalid states and positions are rejected (6 ms)
+  drift correction
+    √ no correction inside the 100ms window (2 ms)
+    √ moderate drift is corrected with a gentle playbackRate nudge, not a seek (4 ms)
+    √ large drift triggers a seek to the authoritative position (1 ms)
+    √ uses the report timestamp (server clock) rather than arrival time (1 ms)
+    √ while paused, only a meaningful offset triggers a seek (1 ms)
+  presence, capacity and moderation
+    √ a reconnect for an existing participant is not a new join (1 ms)
+    √ second tab of the same user does not mark them disconnected when one closes (1 ms)
+    √ capacity, lock and removal are enforced (6 ms)
+    √ only the host can moderate (4 ms)
+    √ peak participants tracks the maximum concurrently connected (1 ms)
+  host disconnect policy (deterministic)
+    √ host disconnect pauses playback at the current position for everyone (2 ms)
+    √ promotes the longest-present connected participant; ties broken by userId (2 ms)
+    √ disconnected participants are never promoted; empty room keeps no host change (2 ms)
+  timeline trivia triggering
+    √ fires markers crossed during playback, each exactly once (3 ms)
+    √ markers jumped over by a seek are skipped; nothing fires while paused (1 ms)
+  narrative-variation voting
+    √ majority wins and is recorded as applied (2 ms)
+    √ voters can change their vote; one vote per user (1 ms)
+    √ ties resolve to the authored default option, else authored order (1 ms)
+    √ only the host opens votes; voting must be enabled; one vote at a time (7 ms)
+
+PASS tests/aiRetrieval.test.js
+  retrieval
+    √ intent detection (18 ms)
+    √ "who just walked in" returns the most recently appeared on-screen character only (6 ms)
+    √ "who directed this?" answers from trivia, not from whoever is on screen (2 ms)
+    √ "what does X mean" prefers the glossary entry and drops weaker matches (2 ms)
+    √ named-entity question finds the glossary entry (1 ms)
+    √ never retrieves entries after the current timestamp (no spoilers) (3 ms)
+    √ irrelevant questions retrieve nothing (1 ms)
+    √ range query uses the ts-sorted timeline (1 ms)
+  grounded answers (extractive mode)
+    √ answer cites the timeline entries it used, all of which exist in the title (6 ms)
+    √ declines instead of fabricating when there is no relevant metadata (6 ms)
+    √ every sentence of an extractive answer comes from a cited entry (4 ms)
+    √ verbosity controls how many entries are used (3 ms)
+  trivia tracks, variations and subtitles
+    √ verbosity filters the trivia track (1 ms)
+    √ locale alternates replace default lines; applied variations override them (4 ms)
+    √ upcoming variation points are offered only within the window and until applied (2 ms)
+  timeline schema validation
+    √ authored fixtures are valid (14 ms)
+    √ malformed uploads are rejected with precise paths (3 ms)
+    √ YAML syntax errors report line numbers (3 ms)
+
+PASS tests/recommender.test.js
+  √ implicit score: completion + high rating is positive, abandonment + low rating negative (18 ms)
+  √ collaborative signal: users who liked a1 also liked a2 (6 ms)
+  √ rail reacts to new interactions without retraining (2 ms)
+  √ cold start uses declared genre affinity (2 ms)
+  √ offline Precision@5 on the generated dataset meets the >= 0.6 target (111 ms)
+
+PASS tests/rbac.test.js (10.813 s)
+  authentication
+    √ protected routes reject missing, forged and expired tokens (75 ms)
+    √ access tokens are short-lived (<= 1 hour) (1 ms)
+    √ refresh rotates the token; a used refresh token cannot be replayed (186 ms)
+    √ self-registration cannot grant admin (146 ms)
+  admin-only actions are enforced server-side
+    √ post /api/v1/admin/timelines -> 403 for viewer and host (15 ms)
+    √ post /api/v1/admin/timelines/validate -> 403 for viewer and host (15 ms)
+    √ post /api/v1/admin/recommendations/retrain -> 403 for viewer and host (13 ms)
+    √ get /api/v1/admin/metrics -> 403 for viewer and host (14 ms)
+    √ get /api/v1/admin/users -> 403 for viewer and host (13 ms)
+    √ delete /api/v1/admin/titles/t_1001 -> 403 for viewer and host (12 ms)
+    √ admin can upload a timeline; malformed uploads get a clear 422 (28 ms)
+  host-only actions
+    √ viewers cannot create Watch Spaces; hosts can (29 ms)
+    √ invite-only rooms are closed to non-members until they use the invite code (61 ms)
+    √ a participant cannot end the room; the host can (10 ms)
+    √ WebSocket handshake requires a valid JWT (39 ms)
+    √ over WebSocket, only the current host may issue playback/moderation/vote events (127 ms)
+    √ outsiders cannot join an invite-only room over WebSocket (24 ms)
+    √ chat input is sanitized server-side (no stored XSS) (24 ms)
+
+PASS tests/realtime.test.js (18.318 s)
+  √ host play/pause/seek reaches all clients within 1 second (974 ms)
+  √ a participant joining mid-playback gets the authoritative position (within 250ms) (1088 ms)
+  √ sync ping/pong works before joining (clock sync precedes the join handshake) (178 ms)
+  √ sync ping/pong returns the server receive time (182 ms)
+  √ chat is delivered in order to everyone and history is available after reconnect (752 ms)
+  √ a client gone longer than the grace window is reported as left (742 ms)
+  √ host disconnect: playback pauses for everyone, then the earliest participant is promoted (986 ms)
+  √ host reconnecting within the grace window keeps the host role (919 ms)
+  √ trivia cards fire within 1 second of crossing their authored marker (1134 ms)
+  √ variation vote result is applied identically to all clients (506 ms)
+  √ AI ask over REST is grounded and broadcast to the room (325 ms)
+  √ ending a session persists a summary that reconciles with the event log (1114 ms)
+
+A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+Test Suites: 5 passed, 5 total
+Tests:       80 passed, 80 total
+Snapshots:   0 total
+Time:        19.484 s, estimated 20 s
+Ran all test suites.

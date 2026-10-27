@@ -1,0 +1,227 @@
+{
+  "user": "viewer@watchspaces.local",
+  "interactions": [
+    {
+      "titleId": "t_1001",
+      "name": "Big Buck Bunny",
+      "genres": [
+        "Animation",
+        "Comedy",
+        "Family"
+      ],
+      "posterColor": "#5c8a2e",
+      "watchedSeconds": 596,
+      "progress": 1,
+      "completed": true,
+      "rating": 5,
+      "lastWatchedAt": "2026-10-23T14:04:57.860Z"
+    },
+    {
+      "titleId": "t_1003",
+      "name": "Tears of Steel",
+      "genres": [
+        "Sci-Fi",
+        "Action",
+        "Drama"
+      ],
+      "posterColor": "#2e4a6b",
+      "watchedSeconds": 734,
+      "progress": 1,
+      "completed": true,
+      "rating": 5,
+      "lastWatchedAt": "2026-10-23T14:02:56.289Z"
+    },
+    {
+      "titleId": "t_1013",
+      "name": "Orbital Debt",
+      "genres": [
+        "Sci-Fi",
+        "Drama"
+      ],
+      "posterColor": "#264653",
+      "watchedSeconds": 2,
+      "progress": 0.13333333333333333,
+      "completed": false,
+      "rating": 2,
+      "lastWatchedAt": "2026-10-23T13:54:35.307Z"
+    },
+    {
+      "titleId": "t_1004",
+      "name": "Elephants Dream",
+      "genres": [
+        "Animation",
+        "Fantasy",
+        "Surreal"
+      ],
+      "posterColor": "#6b5b3e",
+      "watchedSeconds": 500,
+      "progress": 0.7656967840735069,
+      "completed": false,
+      "rating": 4,
+      "lastWatchedAt": "2026-10-23T13:54:35.306Z"
+    }
+  ],
+  "rail": {
+    "modelTrainedAt": "2026-10-23T13:54:35.355Z",
+    "basedOnInteractions": 6,
+    "items": [
+      {
+        "titleId": "t_1007",
+        "score": 0.713,
+        "cf": 0.715,
+        "cb": 0.598,
+        "reason": "Matches your taste in Animation",
+        "title": {
+          "id": "t_1007",
+          "name": "Moss & Pebble",
+          "genres": [
+            "Animation",
+            "Comedy",
+            "Family"
+          ],
+          "year": 2022,
+          "posterColor": "#5f7f3a",
+          "synopsis": "Two very small creatures attempt a very big garden adventure.",
+          "hasFullTimeline": false
+        }
+      },
+      {
+        "titleId": "t_1010",
+        "score": 0.664,
+        "cf": 0.727,
+        "cb": 0.519,
+        "reason": "Matches your taste in Animation",
+        "title": {
+          "id": "t_1010",
+          "name": "The Acorn Heist",
+          "genres": [
+            "Animation",
+            "Comedy"
+          ],
+          "year": 2018,
+          "posterColor": "#7b5e3b",
+          "synopsis": "A crew of squirrels plans the most daring nut robbery the forest has ever seen.",
+          "hasFullTimeline": false
+        }
+      },
+      {
+        "titleId": "t_1009",
+        "score": 0.642,
+        "cf": 0.713,
+        "cb": 0.48,
+        "reason": "Matches your taste in Animation",
+        "title": {
+          "id": "t_1009",
+          "name": "Tiny Dragon Academy",
+          "genres": [
+            "Animation",
+            "Fantasy",
+            "Family"
+          ],
+          "year": 2023,
+          "posterColor": "#8e3b46",
+          "synopsis": "The smallest dragon in class has the biggest ambitions.",
+          "hasFullTimeline": false
+        }
+      },
+      {
+        "titleId": "t_1005",
+        "score": 0.641,
+        "cf": 0.713,
+        "cb": 0.472,
+        "reason": "Matches your taste in Animation",
+        "title": {
+          "id": "t_1005",
+          "name": "Paper Lantern Parade",
+          "genres": [
+            "Animation",
+            "Family"
+          ],
+          "year": 2021,
+          "posterColor": "#c9772b",
+          "synopsis": "A shy paper lantern dreams of leading the city festival parade.",
+          "hasFullTimeline": false
+        }
+      },
+      {
+        "titleId": "t_1002",
+        "score": 0.631,
+        "cf": 0.713,
+        "cb": 0.473,
+        "reason": "Matches your taste in Animation",
+        "title": {
+          "id": "t_1002",
+          "name": "Sintel",
+          "genres": [
+            "Animation",
+            "Fantasy",
+            "Adventure"
+          ],
+          "year": 2010,
+          "posterColor": "#7a3b2e",
+          "synopsis": "A lone young woman braves snow, desert and danger to find the baby dragon she once rescued.",
+          "hasFullTimeline": true
+        }
+      },
+      {
+        "titleId": "t_1011",
+        "score": 0.62,
+        "cf": 0.73,
+        "cb": 0.439,
+        "reason": "Matches your taste in Animation",
+        "title": {
+          "id": "t_1011",
+          "name": "Lighthouse Mouse",
+          "genres": [
+            "Animation",
+            "Family",
+            "Adventure"
+          ],
+          "year": 2017,
+          "posterColor": "#2a6f97",
+          "synopsis": "A mouse keeps the lighthouse burning through the worst storm in a century.",
+          "hasFullTimeline": false
+        }
+      },
+      {
+        "titleId": "t_1006",
+        "score": 0.576,
+        "cf": 0.708,
+        "cb": 0.399,
+        "reason": "Because you watched Big Buck Bunny",
+        "title": {
+          "id": "t_1006",
+          "name": "The Clockwork Fox",
+          "genres": [
+            "Animation",
+            "Adventure",
+            "Family"
+          ],
+          "year": 2019,
+          "posterColor": "#a0522d",
+          "synopsis": "A wind-up fox sets out to find the inventor who built her.",
+          "hasFullTimeline": false
+        }
+      },
+      {
+        "titleId": "t_1008",
+        "score": 0.574,
+        "cf": 0.71,
+        "cb": 0.38,
+        "reason": "Because you watched Big Buck Bunny",
+        "title": {
+          "id": "t_1008",
+          "name": "Sky Whale Lullaby",
+          "genres": [
+            "Animation",
+            "Fantasy"
+          ],
+          "year": 2020,
+          "posterColor": "#3d5a80",
+          "synopsis": "A girl rides a whale through the clouds to find the song that will let her sleep.",
+          "hasFullTimeline": false
+        }
+      }
+    ]
+  }
+}

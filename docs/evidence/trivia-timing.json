@@ -1,0 +1,136 @@
+{
+  "title": "t_1001",
+  "markers": 15,
+  "within1s": 15,
+  "ratio": 1,
+  "target": ">= 95% within 1s",
+  "lagSummaryMs": {
+    "count": 15,
+    "p50": 38,
+    "p95": 94,
+    "p99": 94,
+    "max": 94
+  },
+  "results": [
+    {
+      "eventId": "evt_bbb_002",
+      "ts": 5,
+      "type": "trivia",
+      "received": true,
+      "appearedAfterCrossingMs": 24,
+      "serverLagMs": 25
+    },
+    {
+      "eventId": "evt_bbb_003",
+      "ts": 20,
+      "type": "trivia",
+      "received": true,
+      "appearedAfterCrossingMs": 33,
+      "serverLagMs": 34
+    },
+    {
+      "eventId": "evt_bbb_005",
+      "ts": 70,
+      "type": "glossary",
+      "received": true,
+      "appearedAfterCrossingMs": 50,
+      "serverLagMs": 50
+    },
+    {
+      "eventId": "evt_bbb_006",
+      "ts": 90,
+      "type": "scene",
+      "received": true,
+      "appearedAfterCrossingMs": 39,
+      "serverLagMs": 34
+    },
+    {
+      "eventId": "evt_bbb_008",
+      "ts": 130,
+      "type": "trivia",
+      "received": true,
+      "appearedAfterCrossingMs": 38,
+      "serverLagMs": 36
+    },
+    {
+      "eventId": "evt_bbb_012",
+      "ts": 170,
+      "type": "scene",
+      "received": true,
+      "appearedAfterCrossingMs": 24,
+      "serverLagMs": 24
+    },
+    {
+      "eventId": "evt_bbb_013",
+      "ts": 200,
+      "type": "glossary",
+      "received": true,
+      "appearedAfterCrossingMs": 42,
+      "serverLagMs": 42
+    },
+    {
+      "eventId": "evt_bbb_015",
+      "ts": 260,
+      "type": "scene",
+      "received": true,
+      "appearedAfterCrossingMs": 30,
+      "serverLagMs": 30
+    },
+    {
+      "eventId": "evt_bbb_016",
+      "ts": 290,
+      "type": "trivia",
+      "received": true,
+      "appearedAfterCrossingMs": 54,
+      "serverLagMs": 53
+    },
+    {
+      "eventId": "evt_bbb_017",
+      "ts": 320,
+      "type": "scene",
+      "received": true,
+      "appearedAfterCrossingMs": 25,
+      "serverLagMs": 25
+    },
+    {
+      "eventId": "evt_bbb_018",
+      "ts": 340,
+      "type": "glossary",
+      "received": true,
+      "appearedAfterCrossingMs": 57,
+      "serverLagMs": 57
+    },
+    {
+      "eventId": "evt_bbb_020",
+      "ts": 420,
+      "type": "scene",
+      "received": true,
+      "appearedAfterCrossingMs": 94,
+      "serverLagMs": 96
+    },
+    {
+      "eventId": "evt_bbb_021",
+      "ts": 450,
+      "type": "trivia",
+      "received": true,
+      "appearedAfterCrossingMs": 2,
+      "serverLagMs": 2
+    },
+    {
+      "eventId": "evt_bbb_022",
+      "ts": 500,
+      "type": "scene",
+      "received": true,
+      "appearedAfterCrossingMs": 45,
+      "serverLagMs": 45
+    },
+    {
+      "eventId": "evt_bbb_023",
+      "ts": 540,
+      "type": "trivia",
+      "received": true,
+      "appearedAfterCrossingMs": 27,
+      "serverLagMs": 29
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "action": "viewer rated Tears of Steel 5 stars (no retrain)",
+  "before": [
+    "Moss & Pebble (0.713) - Matches your taste in Animation",
+    "The Acorn Heist (0.664) - Matches your taste in Animation",
+    "Tiny Dragon Academy (0.642) - Matches your taste in Animation",
+    "Paper Lantern Parade (0.641) - Matches your taste in Animation",
+    "Sintel (0.631) - Matches your taste in Animation",
+    "Lighthouse Mouse (0.62) - Matches your taste in Animation",
+    "The Clockwork Fox (0.576) - Because you watched Big Buck Bunny",
+    "Sky Whale Lullaby (0.574) - Because you watched Big Buck Bunny"
+  ],
+  "after": [
+    "Moss & Pebble (0.713) - Matches your taste in Animation",
+    "The Acorn Heist (0.664) - Matches your taste in Animation",
+    "Tiny Dragon Academy (0.642) - Matches your taste in Animation",
+    "Paper Lantern Parade (0.641) - Matches your taste in Animation",
+    "Sintel (0.631) - Matches your taste in Animation",
+    "Lighthouse Mouse (0.62) - Matches your taste in Animation",
+    "The Clockwork Fox (0.576) - Because you watched Big Buck Bunny",
+    "Sky Whale Lullaby (0.574) - Because you watched Big Buck Bunny"
+  ],
+  "sameModelTrainedAt": true
+}

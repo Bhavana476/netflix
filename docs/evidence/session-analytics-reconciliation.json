@@ -1,0 +1,51 @@
+{
+  "endAck": {
+    "ok": true,
+    "summary": {
+      "durationSeconds": 34,
+      "peakParticipants": 3,
+      "aiQuestions": 5,
+      "triviaSurfaced": 15,
+      "chatMessages": 2,
+      "reactions": 1
+    }
+  },
+  "analytics": {
+    "watchSpaceId": "ws_8a7af0cf25",
+    "status": "ended",
+    "summary": {
+      "durationSeconds": 34,
+      "peakParticipants": 3,
+      "aiQuestions": 5,
+      "triviaSurfaced": 15,
+      "chatMessages": 2,
+      "reactions": 1
+    },
+    "fromEventLog": {
+      "watchSpaceId": "ws_8a7af0cf25",
+      "status": "ended",
+      "startedAt": "2026-10-23T14:04:23.634Z",
+      "endedAt": "2026-10-23T14:04:57.859Z",
+      "durationSeconds": 34,
+      "peakParticipants": 3,
+      "aiQuestions": 5,
+      "triviaSurfaced": 15,
+      "chatMessages": 2,
+      "reactions": 1,
+      "eventCounts": {
+        "chat": 2,
+        "ai_question": 5,
+        "ai_answer": 5,
+        "trivia": 15,
+        "reaction": 1,
+        "join": 3,
+        "leave": 3,
+        "vote": 3,
+        "variation_applied": 1,
+        "system": 1
+      },
+      "totalEvents": 39
+    },
+    "reconciles": true
+  }
+}

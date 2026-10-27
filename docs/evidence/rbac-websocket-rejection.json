@@ -1,0 +1,11 @@
+{
+  "event": "room.playback.update sent by a viewer (not host)",
+  "response": {
+    "ok": false,
+    "error": {
+      "code": "NOT_HOST",
+      "message": "Only the current host controls playback",
+      "event": "room.playback.update"
+    }
+  }
+}

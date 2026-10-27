@@ -1,0 +1,79 @@
+{
+  "viewerUploadsTimeline": {
+    "status": 403,
+    "body": {
+      "error": {
+        "code": "FORBIDDEN",
+        "message": "Requires role: admin"
+      }
+    }
+  },
+  "hostUploadsTimeline": {
+    "status": 403,
+    "body": {
+      "error": {
+        "code": "FORBIDDEN",
+        "message": "Requires role: admin"
+      }
+    }
+  },
+  "viewerCreatesWatchSpace": {
+    "status": 403,
+    "body": {
+      "error": {
+        "code": "FORBIDDEN",
+        "message": "Requires role: host or admin"
+      }
+    }
+  },
+  "viewerReadsMetrics": {
+    "status": 403,
+    "body": {
+      "error": {
+        "code": "FORBIDDEN",
+        "message": "Requires role: admin"
+      }
+    }
+  },
+  "noToken": {
+    "status": 401,
+    "body": {
+      "error": {
+        "code": "UNAUTHENTICATED",
+        "message": "Missing bearer token"
+      }
+    }
+  },
+  "adminValidatesMalformedTimeline": {
+    "status": 422,
+    "body": {
+      "valid": false,
+      "errors": [
+        {
+          "path": "title.id",
+          "message": "Required; must look like \"t_1001\"."
+        },
+        {
+          "path": "title.name",
+          "message": "Required text (max 200 chars)."
+        },
+        {
+          "path": "title.durationSeconds",
+          "message": "Required positive number of seconds."
+        },
+        {
+          "path": "title.genres",
+          "message": "Required non-empty list of genre names."
+        },
+        {
+          "path": "title.videoAssetUrl",
+          "message": "Required; must start with http(s):// or /media/."
+        },
+        {
+          "path": "events[0].text",
+          "message": "Trivia needs \"text\"."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-10-23T14:01:33.036Z",
+  "setup": {
+    "base": "http://localhost:4000",
+    "participants": 47,
+    "durationSeconds": 45,
+    "machine": "win32 x64, node v24.15.0",
+    "note": "All clients on one machine (loopback); simulated players with +-0.6% clock skew and 40-200ms snapshot-apply latency."
+  },
+  "excludedTransitionSamples": 6,
+  "syncDriftVsAuthoritativeMs": {
+    "count": 7238,
+    "p50": 28.6,
+    "p95": 97.2,
+    "p99": 199.6,
+    "max": 245.8
+  },
+  "maxSpreadBetweenAnyTwoClientsMs": {
+    "count": 154,
+    "p50": 97.9,
+    "p95": 202.5,
+    "p99": 202.5,
+    "max": 202.5
+  },
+  "midPlaybackJoinToWithin250msMs": {
+    "count": 3,
+    "p50": 130,
+    "p95": 141,
+    "p99": 141,
+    "max": 141
+  },
+  "roomJoinAckMs": {
+    "count": 47,
+    "p50": 8,
+    "p95": 12,
+    "p99": 12,
+    "max": 12
+  },
+  "hostActionPropagationToAllClientsMs": {
+    "count": 4,
+    "p50": 6,
+    "p95": 7,
+    "p99": 7,
+    "max": 7
+  },
+  "chatFanoutServerToLastClientMs": {
+    "count": 30,
+    "p50": 5,
+    "p95": 16,
+    "p99": 16,
+    "max": 16
+  },
+  "aiAnswerLatencyMs": {
+    "count": 28,
+    "p50": 14.7,
+    "p95": 23.1,
+    "p99": 41.7,
+    "max": 41.7
+  },
+  "apiLatencyNonAiMs": {
+    "count": 200,
+    "p50": 5.1,
+    "p95": 7.9,
+    "p99": 8.8,
+    "max": 17.3
+  },
+  "joinSuccessRate": "47/47"
+}

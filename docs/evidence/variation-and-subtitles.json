@@ -1,0 +1,121 @@
+{
+  "subtitleLocaleSwap": {
+    "line": "sub_bbb_05",
+    "en": {
+      "id": "sub_bbb_05",
+      "start": 230,
+      "end": 236,
+      "text": "[Bunny sighs] Not again...",
+      "source": "default"
+    },
+    "es": {
+      "id": "sub_bbb_05",
+      "start": 230,
+      "end": 236,
+      "text": "[El conejo suspira] Otra vez no...",
+      "source": "locale:es"
+    }
+  },
+  "voteOpened": {
+    "ok": true,
+    "variationId": "v_bbb_01",
+    "prompt": "How should Bunny's sigh be captioned?",
+    "kind": "subtitle",
+    "options": [
+      {
+        "id": "a",
+        "label": "Original"
+      },
+      {
+        "id": "b",
+        "label": "Exasperated"
+      },
+      {
+        "id": "c",
+        "label": "Disappointed parent"
+      }
+    ],
+    "closesAt": 1792764297014,
+    "applyAtTs": 228
+  },
+  "appliedOnEachClient": [
+    {
+      "client": "host",
+      "receivedAt": 1792764297026,
+      "payload": {
+        "variationId": "v_bbb_01",
+        "winningOptionId": "c",
+        "counts": {
+          "a": 0,
+          "b": 1,
+          "c": 2
+        },
+        "totalVotes": 3,
+        "applyAtTs": 228,
+        "via": "vote",
+        "kind": "subtitle",
+        "targetLineId": "sub_bbb_05",
+        "endTs": 236,
+        "option": {
+          "id": "c",
+          "label": "Disappointed parent",
+          "text": "[Bunny sighs] I'm not mad. I'm just disappointed."
+        }
+      }
+    },
+    {
+      "client": "viewer",
+      "receivedAt": 1792764297026,
+      "payload": {
+        "variationId": "v_bbb_01",
+        "winningOptionId": "c",
+        "counts": {
+          "a": 0,
+          "b": 1,
+          "c": 2
+        },
+        "totalVotes": 3,
+        "applyAtTs": 228,
+        "via": "vote",
+        "kind": "subtitle",
+        "targetLineId": "sub_bbb_05",
+        "endTs": 236,
+        "option": {
+          "id": "c",
+          "label": "Disappointed parent",
+          "text": "[Bunny sighs] I'm not mad. I'm just disappointed."
+        }
+      }
+    },
+    {
+      "client": "viewer2",
+      "receivedAt": 1792764297026,
+      "payload": {
+        "variationId": "v_bbb_01",
+        "winningOptionId": "c",
+        "counts": {
+          "a": 0,
+          "b": 1,
+          "c": 2
+        },
+        "totalVotes": 3,
+        "applyAtTs": 228,
+        "via": "vote",
+        "kind": "subtitle",
+        "targetLineId": "sub_bbb_05",
+        "endTs": 236,
+        "option": {
+          "id": "c",
+          "label": "Disappointed parent",
+          "text": "[Bunny sighs] I'm not mad. I'm just disappointed."
+        }
+      }
+    }
+  ],
+  "identicalPayloads": true,
+  "receiveSpreadMs": 0,
+  "playbackUpdatesCausedBySwap": [
+    0,
+    0
+  ]
+}

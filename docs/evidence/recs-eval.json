@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-10-23T13:28:22.562Z",
+  "metric": "Precision@5",
+  "target": 0.6,
+  "runs": [
+    {
+      "k": 5,
+      "users": 60,
+      "precisionAtK": 0.81,
+      "model": {
+        "users": 60,
+        "items": 30
+      },
+      "dataset": {
+        "users": 60,
+        "titles": 30,
+        "interactions": 681,
+        "trainInteractions": 381,
+        "heldOutPerUser": 5,
+        "seed": 42
+      }
+    },
+    {
+      "k": 5,
+      "users": 60,
+      "precisionAtK": 0.773,
+      "model": {
+        "users": 60,
+        "items": 30
+      },
+      "dataset": {
+        "users": 60,
+        "titles": 30,
+        "interactions": 690,
+        "trainInteractions": 390,
+        "heldOutPerUser": 5,
+        "seed": 7
+      }
+    },
+    {
+      "k": 5,
+      "users": 60,
+      "precisionAtK": 0.813,
+      "model": {
+        "users": 60,
+        "items": 30
+      },
+      "dataset": {
+        "users": 60,
+        "titles": 30,
+        "interactions": 680,
+        "trainInteractions": 380,
+        "heldOutPerUser": 5,
+        "seed": 1234
+      }
+    }
+  ],
+  "mean": 0.799
+}

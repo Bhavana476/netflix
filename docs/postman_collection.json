@@ -1,0 +1,137 @@
+{
+  "info": {
+    "name": "Watch Spaces API",
+    "description": "Run 'Login (host)' and 'Login (viewer)' first; tokens are captured into collection variables. Set baseUrl and the passwords in the collection variables.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000" },
+    { "key": "hostEmail", "value": "host@watchspaces.local" },
+    { "key": "hostPassword", "value": "" },
+    { "key": "viewerEmail", "value": "viewer@watchspaces.local" },
+    { "key": "viewerPassword", "value": "" },
+    { "key": "adminEmail", "value": "admin@watchspaces.local" },
+    { "key": "adminPassword", "value": "" },
+    { "key": "hostToken", "value": "" },
+    { "key": "viewerToken", "value": "" },
+    { "key": "adminToken", "value": "" },
+    { "key": "refreshToken", "value": "" },
+    { "key": "watchSpaceId", "value": "" },
+    { "key": "inviteCode", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        { "name": "API health", "request": { "method": "GET", "url": "{{baseUrl}}/health" } },
+        { "name": "Realtime health", "request": { "method": "GET", "url": "{{baseUrl}}/health/realtime" } }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (host)",
+          "event": [{ "listen": "test", "script": { "exec": ["const j = pm.response.json();", "pm.collectionVariables.set('hostToken', j.accessToken);", "pm.collectionVariables.set('refreshToken', j.refreshToken);"] } }],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/auth/login", "body": { "mode": "raw", "raw": "{ \"email\": \"{{hostEmail}}\", \"password\": \"{{hostPassword}}\" }" } }
+        },
+        {
+          "name": "Login (viewer)",
+          "event": [{ "listen": "test", "script": { "exec": ["pm.collectionVariables.set('viewerToken', pm.response.json().accessToken);"] } }],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/auth/login", "body": { "mode": "raw", "raw": "{ \"email\": \"{{viewerEmail}}\", \"password\": \"{{viewerPassword}}\" }" } }
+        },
+        {
+          "name": "Login (admin)",
+          "event": [{ "listen": "test", "script": { "exec": ["pm.collectionVariables.set('adminToken', pm.response.json().accessToken);"] } }],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/auth/login", "body": { "mode": "raw", "raw": "{ \"email\": \"{{adminEmail}}\", \"password\": \"{{adminPassword}}\" }" } }
+        },
+        {
+          "name": "Register",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/auth/register", "body": { "mode": "raw", "raw": "{ \"email\": \"new{{$timestamp}}@example.com\", \"password\": \"password-123\", \"displayName\": \"New User\", \"role\": \"viewer\" }" } }
+        },
+        {
+          "name": "Refresh (rotates)",
+          "event": [{ "listen": "test", "script": { "exec": ["const j = pm.response.json();", "pm.collectionVariables.set('hostToken', j.accessToken);", "pm.collectionVariables.set('refreshToken', j.refreshToken);"] } }],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/auth/refresh", "body": { "mode": "raw", "raw": "{ \"refreshToken\": \"{{refreshToken}}\" }" } }
+        },
+        { "name": "Me", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/auth/me" } },
+        {
+          "name": "Set subtitle locale",
+          "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/auth/me/preferences", "body": { "mode": "raw", "raw": "{ \"subtitleLocale\": \"es\" }" } }
+        }
+      ]
+    },
+    {
+      "name": "Titles",
+      "item": [
+        { "name": "Catalog", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/titles" } },
+        { "name": "Title detail", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/titles/t_1001" } },
+        { "name": "Timeline range (7.3.2)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/titles/t_1001/timeline?from=140&to=240" } },
+        { "name": "Subtitles (es)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/titles/t_1001/subtitles?locale=es" } }
+      ]
+    },
+    {
+      "name": "Watch Spaces",
+      "item": [
+        {
+          "name": "Create (7.3.1, host)",
+          "event": [{ "listen": "test", "script": { "exec": ["const j = pm.response.json();", "pm.collectionVariables.set('watchSpaceId', j.watchSpaceId);", "pm.collectionVariables.set('inviteCode', j.inviteCode);"] } }],
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{hostToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/watch-spaces", "body": { "mode": "raw", "raw": "{ \"titleId\": \"t_1001\", \"maxParticipants\": 25, \"aiVerbosity\": \"normal\", \"votingEnabled\": true }" } }
+        },
+        {
+          "name": "Create as viewer (expect 403)",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/watch-spaces", "body": { "mode": "raw", "raw": "{ \"titleId\": \"t_1001\" }" } }
+        },
+        {
+          "name": "Join by invite code (viewer)",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/watch-spaces/join", "body": { "mode": "raw", "raw": "{ \"inviteCode\": \"{{inviteCode}}\" }" } }
+        },
+        { "name": "My rooms", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/watch-spaces?status=live,scheduled" } },
+        { "name": "Room detail", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/watch-spaces/{{watchSpaceId}}" } },
+        {
+          "name": "AI ask (7.3.3)",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/watch-spaces/{{watchSpaceId}}/ai/ask", "body": { "mode": "raw", "raw": "{ \"userId\": \"ignored-token-user-is-used\", \"currentTs\": 152, \"question\": \"Who is the character that just walked in?\" }" } }
+        },
+        {
+          "name": "AI ask - off-topic (declines)",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/watch-spaces/{{watchSpaceId}}/ai/ask", "body": { "mode": "raw", "raw": "{ \"currentTs\": 300, \"question\": \"Who won the 1998 World Cup?\" }" } }
+        },
+        { "name": "Messages", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/watch-spaces/{{watchSpaceId}}/messages?limit=50" } },
+        { "name": "End as viewer (expect 403)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/watch-spaces/{{watchSpaceId}}/end" } },
+        { "name": "End (host)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{hostToken}}" }], "url": "{{baseUrl}}/api/v1/watch-spaces/{{watchSpaceId}}/end" } },
+        { "name": "Analytics + reconciliation", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{hostToken}}" }], "url": "{{baseUrl}}/api/v1/watch-spaces/{{watchSpaceId}}/analytics" } }
+      ]
+    },
+    {
+      "name": "Me",
+      "item": [
+        { "name": "Recommendations", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/me/recommendations?k=10" } },
+        {
+          "name": "Rate a title",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/me/interactions", "body": { "mode": "raw", "raw": "{ \"titleId\": \"t_1003\", \"rating\": 5 }" } }
+        },
+        { "name": "History", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }], "url": "{{baseUrl}}/api/v1/me/history" } },
+        { "name": "Past sessions", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{hostToken}}" }], "url": "{{baseUrl}}/api/v1/me/sessions" } }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Validate timeline (malformed -> 422)",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/admin/timelines/validate", "body": { "mode": "raw", "raw": "{ \"format\": \"yaml\", \"content\": \"title:\\n  id: bad id\\nevents: []\\n\" }" } }
+        },
+        {
+          "name": "Upload timeline (JSON)",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/admin/timelines", "body": { "mode": "raw", "raw": "{ \"timeline\": { \"title\": { \"id\": \"t_2001\", \"name\": \"Postman Title\", \"durationSeconds\": 60, \"genres\": [\"Test\"], \"videoAssetUrl\": \"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4\" }, \"characters\": [], \"events\": [ { \"id\": \"evt_0001\", \"ts\": 5, \"type\": \"trivia\", \"text\": \"Uploaded via Postman.\" } ] } }" } }
+        },
+        {
+          "name": "Upload as viewer (expect 403)",
+          "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{viewerToken}}" }, { "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/v1/admin/timelines", "body": { "mode": "raw", "raw": "{ \"timeline\": {} }" } }
+        },
+        { "name": "Retrain recommender", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/api/v1/admin/recommendations/retrain" } },
+        { "name": "Metrics", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/api/v1/admin/metrics" } }
+      ]
+    }
+  ]
+}
