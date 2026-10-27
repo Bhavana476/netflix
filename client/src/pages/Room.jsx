@@ -18,7 +18,9 @@ function appliedFromSnapshot(room) {
 function ChatPanel({ messages, onSend, onTyping, typing, muted, me }) {
   const [text, setText] = useState('');
   const endRef = useRef();
-  useEffect(() => endRef.current && endRef.current.scrollIntoView({ block: 'end' }), [messages.length]);
+  useEffect(() => {
+    if (endRef.current) endRef.current.scrollIntoView({ block: 'end' });
+  }, [messages.length]);
   const submit = (e) => {
     e.preventDefault();
     if (!text.trim()) return;
@@ -51,7 +53,9 @@ function CopilotPanel({ messages, onAsk, pending, isHost, onPin, aiVerbosity }) 
   const [q, setQ] = useState('');
   const endRef = useRef();
   const answers = messages.filter((m) => m.kind === 'ai_answer');
-  useEffect(() => endRef.current && endRef.current.scrollIntoView({ block: 'end' }), [answers.length, pending]);
+  useEffect(() => {
+    if (endRef.current) endRef.current.scrollIntoView({ block: 'end' });
+  }, [answers.length, pending]);
   const ask = (e) => {
     e.preventDefault();
     if (!q.trim()) return;
