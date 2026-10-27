@@ -182,3 +182,7 @@ textarea.code { margin: 10px 0; resize: vertical; }
   .page { padding: 16px; }
   .trivia-stack { width: 60%; }
 }
+.title-modal { max-width: 720px; display: grid; gap: 8px; }
+.title-modal .preview { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; }
+.catalog-filters { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.catalog-filters input { flex: 1; min-width: 180px; }

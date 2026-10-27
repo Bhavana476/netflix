@@ -76,10 +76,32 @@ function CreateRoomModal({ title, onClose }) {
   );
 }
 
+// Opened for every role: a solo preview plus details. Only host/admin get the Watch Space action.
+function TitleModal({ title, canHost, onStart, onClose }) {
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal title-modal" onClick={(e) => e.stopPropagation()}>
+        <video className="preview" src={title.videoAssetUrl} controls autoPlay playsInline />
+        <h2>{title.name}</h2>
+        <div className="muted small">{[title.year, (title.genres || []).join(', '), title.durationSeconds && fmtTime(title.durationSeconds)].filter(Boolean).join(' · ')}</div>
+        {title.synopsis && <p>{title.synopsis}</p>}
+        {!canHost && <p className="muted small">To watch together, ask a host for an invite code and enter it in <b>Join</b>.</p>}
+        <div className="modal-actions">
+          <button type="button" className="btn ghost" onClick={onClose}>Close</button>
+          {canHost && <button type="button" className="btn primary" onClick={onStart}>Start a Watch Space</button>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Dashboard({ user }) {
   const nav = useNavigate();
   const [data, setData] = useState({ recs: null, history: [], rooms: [], sessions: [], titles: [] });
   const [creating, setCreating] = useState(null);
+  const [viewing, setViewing] = useState(null);
+  const [query, setQuery] = useState('');
+  const [genre, setGenre] = useState('');
   const [code, setCode] = useState('');
   const [joinError, setJoinError] = useState('');
   const canHost = user.role === 'host' || user.role === 'admin';
@@ -115,6 +137,11 @@ export default function Dashboard({ user }) {
 
   const live = data.rooms.filter((r) => r.status === 'live');
   const upcoming = data.rooms.filter((r) => r.status === 'scheduled');
+  const genres = [...new Set(data.titles.flatMap((t) => t.genres))].sort();
+  const q = query.trim().toLowerCase();
+  const shown = data.titles.filter((t) => (!genre || t.genres.includes(genre)) && (!q || t.name.toLowerCase().includes(q)));
+  // Rec/history items carry a partial title; resolve to the full catalog entry for the modal.
+  const open = (id, fallback) => setViewing(data.titles.find((t) => t.id === id) || { id, ...fallback });
 
   return (
     <main className="page">
@@ -158,7 +185,7 @@ export default function Dashboard({ user }) {
         </h2>
         <div className="rail">
           {data.recs && data.recs.items.map((r) => (
-            <Poster key={r.titleId} t={r.title} onClick={() => canHost && setCreating({ id: r.titleId, name: r.title.name })}>
+            <Poster key={r.titleId} t={r.title} onClick={() => open(r.titleId, r.title)}>
               <div className="reason">{r.reason}</div>
               <div className="score" title={`cf=${r.cf} cb=${r.cb}`}>match {(r.score * 100).toFixed(0)}</div>
             </Poster>
@@ -171,7 +198,7 @@ export default function Dashboard({ user }) {
           <h2>Recently watched</h2>
           <div className="rail">
             {data.history.map((h) => (
-              <Poster key={h.titleId} t={{ ...h, name: h.name }}>
+              <Poster key={h.titleId} t={{ ...h, name: h.name }} onClick={() => open(h.titleId, h)}>
                 <div className="progress"><div style={{ width: `${Math.round(h.progress * 100)}%` }} /></div>
                 <Stars value={h.rating} onRate={(n) => rate(h.titleId, n)} />
               </Poster>
@@ -181,10 +208,18 @@ export default function Dashboard({ user }) {
       )}
 
       <section>
-        <h2>Catalog {canHost ? <span className="muted small">· click a title to start a Watch Space</span> : <span className="muted small">· viewers join rooms by invite code</span>}</h2>
+        <h2>Catalog <span className="muted small">· click a title to preview{canHost ? ' or start a Watch Space' : ''}</span></h2>
+        <div className="catalog-filters">
+          <input type="search" placeholder="Search titles" value={query} onChange={(e) => setQuery(e.target.value)} />
+          <select value={genre} onChange={(e) => setGenre(e.target.value)}>
+            <option value="">All genres</option>
+            {genres.map((g) => <option key={g}>{g}</option>)}
+          </select>
+        </div>
+        {shown.length === 0 && <p className="muted">No titles match.</p>}
         <div className="grid">
-          {data.titles.map((t) => (
-            <Poster key={t.id} t={t} onClick={() => canHost && setCreating(t)}>
+          {shown.map((t) => (
+            <Poster key={t.id} t={t} onClick={() => open(t.id, t)}>
               <div className="muted small">{t.year} · {t.genres.join(', ')} · {fmtTime(t.durationSeconds)}</div>
               <Stars value={(data.history.find((h) => h.titleId === t.id) || {}).rating} onRate={(n) => rate(t.id, n)} />
             </Poster>
@@ -218,6 +253,7 @@ export default function Dashboard({ user }) {
         </section>
       )}
 
+      {viewing && <TitleModal title={viewing} canHost={canHost} onClose={() => setViewing(null)} onStart={() => { setCreating(viewing); setViewing(null); }} />}
       {creating && <CreateRoomModal title={creating} onClose={(reload) => { setCreating(null); if (reload) load(); }} />}
     </main>
   );
