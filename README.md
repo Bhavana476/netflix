@@ -82,7 +82,7 @@ Set `ANTHROPIC_API_KEY` (model `AI_MODEL`, default `claude-haiku-5-5`). The mode
 |---|---|
 | `npm run dev` | Server (`node --watch`) and Vite client |
 | `npm start` | Server only; also serves `client/dist` once it has been built |
-| `npm test` | Jest: 80 tests (state machine, AI retrieval, RBAC over HTTP and WS, real-socket end-to-end, recommender) |
+| `npm test` | Jest: 88 tests (state machine, AI retrieval, RBAC over HTTP and WS, real-socket end-to-end, recommender) |
 | `npm run seed` / `npm run seed -- --reset` | Idempotent seed / wipe and reseed |
 | `npm run recs:eval` | Offline Precision@5 on the generated dataset → `docs/evidence/recs-eval.json` |
 | `npm run recs:train -w server` | Batch retrain (also available as `POST /api/v1/admin/recommendations/retrain`) |
