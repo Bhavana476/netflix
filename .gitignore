@@ -5,3 +5,5 @@ dist/
 coverage/
 *.log
 .DS_Store
+docs/evidence/timing-frames/raw/
+docs/evidence/timing-frames/scan/

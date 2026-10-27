@@ -57,6 +57,17 @@ Raw outputs: [`perf-results-10clients.json`](evidence/perf-results-10clients.jso
 | Subtitle swap and group vote applied | [variation-and-subtitles.json](evidence/variation-and-subtitles.json) | The `es` locale line replaces the `en` line. 3 clients received identical `room.variation.applied` payloads 0 ms apart, and 0 playback updates followed the swap |
 | Recommendation rail and its data | [recommendation-rail-viewer.json](evidence/recommendation-rail-viewer.json), [recommendation-rail-update.json](evidence/recommendation-rail-update.json) | The rail re-ranked after a new rating while `modelTrainedAt` stayed the same (no retrain) |
 | Analytics reconcile with the event log | [session-analytics-reconciliation.json](evidence/session-analytics-reconciliation.json) | `reconciles: true` (peak 3, AI questions 5, trivia 15, chat 2, reactions 1) |
-| Trivia accuracy (manual QA) | [trivia-qa.md](evidence/trivia-qa.md) | ⚠️ **Not completed yet.** It needs a person to watch the clips and tick the sheet; see that file |
+| Trivia accuracy (QA pass) | [trivia-qa.md](evidence/trivia-qa.md) | See that file: facts checked, and timing checked against video frames ([timing-frames/](evidence/timing-frames/)) |
 
-Still to be captured by a person: screenshots or a screen recording of two browser sessions playing in sync, plus a walkthrough video (PRD 12.2 and 13.1). See the demo script in the README.
+### Two-browser demo (screenshots)
+
+Captured on 2026-10-27 by driving two separate headless Microsoft Edge sessions (separate cookie and storage contexts) through the real UI with `puppeteer-core`. The host is "Hana" and the viewer is "Vik", whose subtitle locale is `es`. The viewer joined through the invite link, `/join/<code>`. Both played the real Big Buck Bunny stream from archive.org. The full step log is in [screenshots/demo-log.txt](evidence/screenshots/demo-log.txt), and each step has a `-host.png` and a `-viewer.png` in [evidence/screenshots/](evidence/screenshots/).
+
+| Step | Screenshots | What it shows |
+|---|---|---|
+| Playing in sync | `01-sync-playing-*` | After the host's seek to 2:20, the gap between the two `<video>.currentTime` values over 5 one-second samples was 25, 12, 12, 12 and 12 ms. The host's pause reached the viewer: viewer `paused = true`, gap 23 ms |
+| AI co-pilot Q&A | `02-ai-copilot-*` | "Who is the character that just walked in?" → Frank, citing `character · Frank @ 2:30`. "Who won the World Cup?" → declined, with no matching timeline entry |
+| Subtitle localization swap | `03-subtitle-es-*`, `04-subtitle-swapped-en-*` | The viewer saw "[El conejo bosteza y se estira]". Switching CC to English mid-playback changed it to "[Bunny yawns and stretches]", and the two clients stayed 9 ms apart |
+| Group vote applied | `05-vote-open-*`, `06-variation-applied-*` | Vote "How should Bunny's sigh be captioned?": 2 of 2 voted "Exasperated". At 3:50 both clients showed "[Bunny sighs] Seriously? Fruit? Again?", 10 ms apart |
+
+The seek to 2:20 took 12.7 s to resume because archive.org was slow to fetch that part of the video. During that time the room held everyone in `buffering` and then resumed them together, as designed. A screen *recording* with audio, for the walkthrough in PRD 13.1, still needs a person.

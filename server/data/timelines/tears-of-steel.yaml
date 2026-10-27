@@ -1,5 +1,7 @@
 # Authored timeline for "Tears of Steel" (Blender Foundation, CC BY 3.0).
-# Timestamps are hand-authored approximations against the public sample video; see docs/evidence/trivia-qa.md.
+# Scene/character timestamps were checked against frames sampled every 10 s from the archive.org video
+# (docs/evidence/timing-frames/scan-tos-*.png). Subtitle lines are placed within their scene; exact
+# line timing was not verified against the audio. See docs/evidence/trivia-qa.md.
 title:
   id: t_1003
   name: Tears of Steel
@@ -26,31 +28,30 @@ subtitles:
   version: 1
   defaultLocale: en
   lines:
-    - { id: sub_tos_01, start: 5, end: 8, text: "You're a jerk, Thom.", alternates: { es: "Eres un imbécil, Thom.", fr: "T'es qu'un crétin, Thom." } }
-    - { id: sub_tos_02, start: 9, end: 12, text: "Look, Celia, we have to follow our passions.", alternates: { es: "Mira, Celia, tenemos que seguir nuestras pasiones.", fr: "Écoute, Celia, on doit suivre nos passions." } }
-    - { id: sub_tos_03, start: 12, end: 16, text: "You have your robotics, and I just want to be awesome in space.", alternates: { es: "Tú tienes tu robótica y yo solo quiero ser genial en el espacio.", fr: "Toi tu as ta robotique, et moi je veux juste être génial dans l'espace." } }
-    - { id: sub_tos_04, start: 17, end: 20, text: "Why don't you just admit that you're freaked out by my robot hand?", alternates: { es: "¿Por qué no admites que te asusta mi mano robótica?", fr: "Avoue que ma main robotique te fait flipper." } }
-    - { id: sub_tos_05, start: 470, end: 475, text: "I'm sorry, Celia. I'm sorry for everything.", alternates: { es: "Lo siento, Celia. Lo siento por todo.", fr: "Je suis désolé, Celia. Désolé pour tout." } }
+    - { id: sub_tos_01, start: 27, end: 30, text: "You're a jerk, Thom.", alternates: { es: "Eres un imbécil, Thom.", fr: "T'es qu'un crétin, Thom." } }
+    - { id: sub_tos_02, start: 31, end: 34, text: "Look, Celia, we have to follow our passions.", alternates: { es: "Mira, Celia, tenemos que seguir nuestras pasiones.", fr: "Écoute, Celia, on doit suivre nos passions." } }
+    - { id: sub_tos_03, start: 34, end: 38, text: "You have your robotics, and I just want to be awesome in space.", alternates: { es: "Tú tienes tu robótica y yo solo quiero ser genial en el espacio.", fr: "Toi tu as ta robotique, et moi je veux juste être génial dans l'espace." } }
+    - { id: sub_tos_04, start: 39, end: 42, text: "Why don't you just admit that you're freaked out by my robot hand?", alternates: { es: "¿Por qué no admites que te asusta mi mano robótica?", fr: "Avoue que ma main robotique te fait flipper." } }
+    - { id: sub_tos_05, start: 362, end: 367, text: "I'm sorry, Celia. I'm sorry for everything.", alternates: { es: "Lo siento, Celia. Lo siento por todo.", fr: "Je suis désolé, Celia. Désolé pour tout." } }
 
 events:
-  - { id: evt_tos_001, ts: 0, type: scene, title: "The breakup", text: "On a bridge in Amsterdam, Celia breaks up with Thom, who wants to go to space." }
-  - { id: evt_tos_002, ts: 0, endTs: 120, type: character, characterId: c_thom, text: "Thom argues with Celia on the bridge." }
-  - { id: evt_tos_003, ts: 2, endTs: 120, type: character, characterId: c_celia, text: "Celia confronts Thom on the bridge." }
+  - { id: evt_tos_001, ts: 24, type: scene, title: "The breakup", text: "On a bridge in Amsterdam, Celia breaks up with Thom, who wants to go to space." }
+  - { id: evt_tos_002, ts: 25, endTs: 65, type: character, characterId: c_thom, text: "Thom argues with Celia on the bridge." }
+  - { id: evt_tos_003, ts: 25, endTs: 65, type: character, characterId: c_celia, text: "Celia confronts Thom on the bridge." }
   - { id: evt_tos_004, ts: 20, type: trivia, importance: high, text: "Tears of Steel (project 'Mango', 2012) was the Blender Foundation's first live-action open movie, mixing real footage with CG." }
-  - { id: evt_tos_005, ts: 25, type: glossary, term: Robot hand, definition: "Celia's prosthetic robotic hand - a hint at the robotics work that shapes the future." }
+  - { id: evt_tos_005, ts: 45, type: glossary, term: Robot hand, definition: "Celia's prosthetic robotic hand - a hint at the robotics work that shapes the future." }
   - { id: evt_tos_006, ts: 60, type: trivia, text: "The Mango project set out to improve Blender's visual-effects tools, especially camera/motion tracking and compositing." }
-  - { id: evt_tos_007, ts: 120, type: scene, title: "Years later", text: "In a ruined, robot-occupied Amsterdam, a team prepares to restage a moment from the past." }
-  - { id: evt_tos_008, ts: 125, endTs: 700, type: character, characterId: c_team, text: "The team of warriors and scientists prepares for the operation." }
+  - { id: evt_tos_007, ts: 66, type: scene, title: "Years later", text: "In a ruined, robot-occupied Amsterdam, a team prepares to restage a moment from the past." }
+  - { id: evt_tos_008, ts: 100, endTs: 590, type: character, characterId: c_team, text: "The team of warriors and scientists prepares for the operation." }
   - { id: evt_tos_009, ts: 150, type: glossary, term: Motion tracking, definition: "A VFX technique that follows points in real footage so CG elements can be locked to the camera's movement." }
-  - { id: evt_tos_010, ts: 200, endTs: 700, type: character, characterId: c_thom, text: "An older Thom works with the team." }
-  - { id: evt_tos_011, ts: 240, type: scene, title: "The Oude Kerk", text: "The team gathers at Amsterdam's old church to stage the crucial breakup from the past." }
+  - { id: evt_tos_010, ts: 100, endTs: 590, type: character, characterId: c_thom, text: "An older Thom works with the team." }
+  - { id: evt_tos_011, ts: 255, type: scene, title: "The Oude Kerk", text: "The team gathers at Amsterdam's old church to stage the crucial breakup from the past." }
   - { id: evt_tos_012, ts: 260, type: glossary, term: Oude Kerk, definition: "Amsterdam's 'Old Church', a medieval church in the city's old centre." }
   - { id: evt_tos_013, ts: 300, type: trivia, importance: high, text: "Tears of Steel was written and directed by Ian Hubert and shot in Amsterdam." }
-  - { id: evt_tos_014, ts: 360, type: scene, title: "Robots attack", text: "Giant robots assault the team's position while they fight to buy time." }
   - { id: evt_tos_015, ts: 420, type: glossary, term: Green screen, definition: "A solid-coloured backdrop that is replaced with digital imagery in post-production." }
   - id: evt_tos_016
-    ts: 466
-    endTs: 475
+    ts: 358
+    endTs: 367
     type: variation_point
     variation:
       id: v_tos_01
@@ -62,12 +63,13 @@ events:
         - { id: a, label: "Original", text: "I'm sorry, Celia. I'm sorry for everything." }
         - { id: b, label: "Admits fault", text: "Celia... I was wrong. I'm sorry." }
         - { id: c, label: "Regret", text: "I'm sorry. I never should have left." }
-  - { id: evt_tos_017, ts: 500, type: scene, title: "The apology", text: "Thom finally gets the chance to say what he never said to Celia." }
-  - { id: evt_tos_018, ts: 500, endTs: 700, type: character, characterId: c_celia, text: "Celia faces Thom again." }
+  - { id: evt_tos_017, ts: 355, type: scene, title: "The apology", text: "Thom finally gets the chance to say what he never said to Celia." }
+  - { id: evt_tos_018, ts: 300, endTs: 400, type: character, characterId: c_celia, text: "Celia faces Thom again." }
+  - { id: evt_tos_014, ts: 435, type: scene, title: "Robots attack", text: "Giant robots assault the team's position while they fight to buy time." }
   - { id: evt_tos_019, ts: 600, type: trivia, text: "Like the other Blender open movies, Tears of Steel is released under a Creative Commons Attribution license." }
   - id: evt_tos_020
-    ts: 650
-    endTs: 665
+    ts: 582
+    endTs: 590
     type: variation_point
     variation:
       id: v_tos_02
@@ -78,4 +80,4 @@ events:
         - { id: a, label: "Original", text: "(no epilogue card)" }
         - { id: b, label: "Hopeful", text: "EPILOGUE: Amsterdam, rebuilt. The bridge still stands." }
         - { id: c, label: "Ominous", text: "EPILOGUE: Somewhere, a robot hand twitches." }
-  - { id: evt_tos_021, ts: 680, type: scene, title: "Aftermath", text: "The team waits to learn whether changing the past was enough." }
+  - { id: evt_tos_021, ts: 580, type: scene, title: "Aftermath", text: "The team waits to learn whether changing the past was enough." }

@@ -1,0 +1,22 @@
+room ws_6a3cee38c9 invite NX-CXAZ
+step: play
+playing
+seek 140s resumed after 12700 ms
+sync sample 1: host 145.029s viewer 145.054s gap 25 ms
+sync sample 2: host 146.039s viewer 146.051s gap 12 ms
+sync sample 3: host 147.047s viewer 147.059s gap 12 ms
+sync sample 4: host 148.058s viewer 148.069s gap 12 ms
+sync sample 5: host 149.061s viewer 149.073s gap 12 ms
+after pause: viewer paused = true
+paused: host 150.858s viewer 150.882s gap 23 ms
+seek 150s resumed after 515 ms
+AI panel: Ask about what's on screen: "Who is that?", "What does that word mean?", "What happened earlier?". Answers only use this title's timeline up to the current moment (normal mode). Vik asked at 2:32: “Who is the character that just walked in?” That's Frank — the leader of the three rodent bullies, a flying squirrel who can glide between trees (on screen from 00:02:30). character · Frank @ 2:30 5 ms · extractive Vik asked at 2:34: “Who won the World Cup?” I don't have anything in the Big Buck Bunny metadata up to 00:02:34 that answers that, so I'd rather not guess. no matching timeline entry - dec
+seek 42s resumed after 5084 ms
+viewer subtitle (es): [El conejo bosteza y se estira]
+viewer subtitle (en): [Bunny yawns and stretches]
+after subtitle swap: host 45.270s viewer 45.261s gap 9 ms
+vote card: 🗳 How should Bunny's sigh be captioned? 18s Original 0 Exasperated 2 Disappointed parent 0 2 vote(s) · ties go to the original
+viewer chat: Variation applied (vote a:0 b:2 c:0): “Exasperated” at 3:48 Send
+seek 229s resumed after 4364 ms
+caption at 3:50 host: [Bunny sighs] Seriously? Fruit? Again? [subtitle varied] | viewer: [Bunny sighs] Seriously? Fruit? Again? [subtitle varied]
+after variation: host 230.983s viewer 230.993s gap 10 ms
