@@ -57,8 +57,11 @@ A ready-made Postman collection is in [`postman_collection.json`](postman_collec
 ### GET `/me` (auth)
 `200 { "user": { … } }`
 
+### POST `/host-code/request` (auth)
+`{}` → `201 { "code": "HOST-1A2B3C4D", "expiresAt": "…" }`. Self-service personal host code for the signed-in user. It is bound to that account, works once, and expires after 10 minutes. Only its hash is kept, in memory. `429 TOO_MANY_REQUESTS` after 3 requests per user per hour.
+
 ### POST `/host-code` (auth)
-`{ "code": "HOST-XXXXXX" }` → `200` with `{ user, accessToken, refreshToken }`. A viewer whose code matches the server's `HOST_ACCESS_CODE` is promoted to **host**, and the new access token carries that role. Hosts and admins keep their role. Errors: `403 INVALID_HOST_CODE`, `429 TOO_MANY_ATTEMPTS` (5 wrong codes per user per 15 min), `503 HOST_CODE_DISABLED` when no code is configured.
+`{ "code": "HOST-XXXXXX" }` → `200` with `{ user, accessToken, refreshToken }`. A viewer whose code matches the server's shared `HOST_ACCESS_CODE`, or the caller's own unexpired personal code, is promoted to **host**, and the new access token carries that role. Hosts and admins keep their role. Errors: `403 INVALID_HOST_CODE`, `429 TOO_MANY_ATTEMPTS` (5 wrong codes per user per 15 min).
 
 ### PATCH `/me/preferences` (auth)
 `{ "subtitleLocale": "es", "genreAffinity": ["Sci-Fi"] }` → `200 { "user": { … } }`. The locale must match `xx` or `xx-YY`.

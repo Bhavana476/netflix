@@ -83,6 +83,17 @@ function HostCodeForm() {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [issued, setIssued] = useState(null);
+  const request = async () => {
+    setError('');
+    try {
+      const r = await api('/auth/host-code/request', { method: 'POST' });
+      setIssued(r);
+      setCode(r.code);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
   const submit = async (e) => {
     e.preventDefault();
     setError('');
@@ -104,6 +115,11 @@ function HostCodeForm() {
           <button className="btn primary" disabled={busy}>{busy ? 'Checking…' : 'Unlock'}</button>
         </div>
       </label>
+      {issued ? (
+        <div className="muted small">Your personal code <code>{issued.code}</code> is filled in. It works once, only for your account, until {new Date(issued.expiresAt).toLocaleTimeString()}.</div>
+      ) : (
+        <div className="muted small">Don't have one? <button type="button" className="link" onClick={request}>Get a host code</button></div>
+      )}
       {error && <div className="error">{error}</div>}
     </form>
   );

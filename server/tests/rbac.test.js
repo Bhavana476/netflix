@@ -183,3 +183,34 @@ describe('host access code', () => {
     expect(res.body.user.role).toBe('admin');
   });
 });
+
+describe('self-service personal host codes', () => {
+  const request = (u) => t.http().post('/api/v1/auth/host-code/request').set(auth(u)).send({});
+  const redeem = (u, code) => t.http().post('/api/v1/auth/host-code').set(auth(u)).send({ code });
+
+  test('any signed-in user can get a code and use it once to become host', async () => {
+    const u = await makeUser(t, 'viewer');
+    expect((await t.http().post('/api/v1/auth/host-code/request').send({})).status).toBe(401);
+    const r = await request(u);
+    expect(r.status).toBe(201);
+    expect(r.body.code).toMatch(/^HOST-[0-9A-F]{8}$/);
+    const ok = await redeem(u, r.body.code);
+    expect(ok.status).toBe(200);
+    expect(ok.body.user.role).toBe('host');
+    expect((await redeem(u, r.body.code)).status).toBe(403); // single use
+  });
+
+  test("a personal code does not work for someone else's account", async () => {
+    const [a, b] = await Promise.all([makeUser(t, 'viewer'), makeUser(t, 'viewer')]);
+    const r = await request(a);
+    const res = await redeem(b, r.body.code);
+    expect(res.status).toBe(403);
+    expect((await redeem(a, r.body.code)).status).toBe(200);
+  });
+
+  test('issuance is rate-limited per user', async () => {
+    const u = await makeUser(t, 'viewer');
+    for (let i = 0; i < 3; i++) expect((await request(u)).status).toBe(201);
+    expect((await request(u)).status).toBe(429);
+  });
+});

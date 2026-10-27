@@ -55,14 +55,41 @@ const HOST_CODE_WINDOW_MS = 15 * 60 * 1000;
 const hostCodeAttempts = new Map();
 const sha = (s) => crypto.createHash('sha256').update(String(s)).digest();
 
+// Self-service personal codes: bound to the requesting account, single use, short-lived.
+// Only the hash is kept. Issuance is rate-limited per user.
+const PERSONAL_CODE_TTL_MS = 10 * 60 * 1000;
+const PERSONAL_CODE_MAX_PER_HOUR = 3;
+const personalCodes = new Map(); // userId -> { hash, expiresAt }
+const personalIssued = new Map(); // userId -> [issuedAt...]
+
+router.post('/host-code/request', requireAuth, asyncRoute(async (req, res) => {
+  const now = Date.now();
+  const issued = (personalIssued.get(req.user.id) || []).filter((t) => now - t < 60 * 60 * 1000);
+  if (issued.length >= PERSONAL_CODE_MAX_PER_HOUR) throw new HttpError(429, 'TOO_MANY_REQUESTS', 'You can request 3 host codes per hour. Try again later');
+  const code = `HOST-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+  personalCodes.set(req.user.id, { hash: sha(code), expiresAt: now + PERSONAL_CODE_TTL_MS });
+  personalIssued.set(req.user.id, [...issued, now]);
+  res.status(201).json({ code, expiresAt: new Date(now + PERSONAL_CODE_TTL_MS).toISOString() });
+}));
+
+function matchesCode(userId, code) {
+  const input = sha(code.trim());
+  if (config.hostAccessCode && crypto.timingSafeEqual(input, sha(config.hostAccessCode))) return true;
+  const p = personalCodes.get(userId);
+  if (p && p.expiresAt > Date.now() && crypto.timingSafeEqual(input, p.hash)) {
+    personalCodes.delete(userId);
+    return true;
+  }
+  return false;
+}
+
 router.post('/host-code', requireAuth, asyncRoute(async (req, res) => {
-  if (!config.hostAccessCode) throw new HttpError(503, 'HOST_CODE_DISABLED', 'Host access codes are not enabled on this server');
   const now = Date.now();
   const a = hostCodeAttempts.get(req.user.id);
   const recent = a && now - a.first < HOST_CODE_WINDOW_MS ? a : { first: now, count: 0 };
   if (recent.count >= HOST_CODE_MAX_ATTEMPTS) throw new HttpError(429, 'TOO_MANY_ATTEMPTS', 'Too many wrong codes. Try again in 15 minutes');
   const { code } = req.body || {};
-  if (typeof code !== 'string' || !crypto.timingSafeEqual(sha(code.trim()), sha(config.hostAccessCode))) {
+  if (typeof code !== 'string' || code.length > 64 || !matchesCode(req.user.id, code)) {
     hostCodeAttempts.set(req.user.id, { ...recent, count: recent.count + 1 });
     throw new HttpError(403, 'INVALID_HOST_CODE', 'That host code is not valid');
   }
