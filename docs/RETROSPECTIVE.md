@@ -30,4 +30,4 @@ One end-to-end MERN system covering all three epics:
 4. Add a Playwright test that opens two real browser contexts and asserts the `<video>` currentTime gap. This would replace the simulated players in the drift measurement.
 5. Hand-verify every authored timestamp frame by frame and finish the trivia QA sheet.
 6. Matrix-factorization CF (ALS) and an online evaluation using real co-watch data.
-7. Set up git history and CI. (The build machine had no git, so there is no incremental commit history yet; initialize the repository before submitting.)
+7. Add CI. (Git was not available while building, so the repository was initialized afterwards with commits grouped by layer, not day-by-day history. It still needs pushing to a remote.)
