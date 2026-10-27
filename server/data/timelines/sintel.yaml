@@ -1,0 +1,88 @@
+# Authored timeline for "Sintel" (Blender Foundation, CC BY 3.0).
+# Timestamps are hand-authored approximations against the public sample video; see docs/evidence/trivia-qa.md.
+title:
+  id: t_1002
+  name: Sintel
+  year: 2010
+  durationSeconds: 888
+  genres: [Animation, Fantasy, Adventure]
+  tags: [open-movie, blender, dragons, quest, bittersweet]
+  posterColor: "#7a3b2e"
+  synopsis: A lone young woman braves snow, desert and danger to find the baby dragon she once rescued.
+  videoAssetUrl: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4
+
+characters:
+  - id: c_sintel
+    name: Sintel
+    description: a determined young woman on a lonely quest to find her lost dragon companion
+  - id: c_scales
+    name: Scales
+    description: the baby dragon Sintel rescues, nurses back to health and names Scales
+  - id: c_shaman
+    name: The Shaman
+    description: an old man of the mountains who shelters Sintel after she collapses in the snow
+  - id: c_dragon
+    name: The Adult Dragon
+    description: a huge dragon that snatches Scales away from Sintel
+
+subtitles:
+  version: 1
+  defaultLocale: en
+  lines:
+    - { id: sub_sin_01, start: 180, end: 183, text: "You're lucky to be alive.", alternates: { es: "Tienes suerte de estar viva.", fr: "Tu as de la chance d'être en vie." } }
+    - { id: sub_sin_02, start: 184, end: 188, text: "What brings you to the land of the gatekeepers?", alternates: { es: "¿Qué te trae a la tierra de los guardianes?", fr: "Qu'est-ce qui t'amène au pays des gardiens ?" } }
+    - { id: sub_sin_03, start: 189, end: 191, text: "I'm searching for someone.", alternates: { es: "Estoy buscando a alguien.", fr: "Je cherche quelqu'un." } }
+    - { id: sub_sin_04, start: 192, end: 195, text: "Someone very dear? A kindred spirit?", alternates: { es: "¿Alguien muy querido? ¿Un alma gemela?", fr: "Quelqu'un de très cher ? Une âme sœur ?" } }
+    - { id: sub_sin_05, start: 196, end: 199, text: "A dragon.", alternates: { es: "Un dragón.", fr: "Un dragon." } }
+    - { id: sub_sin_06, start: 335, end: 339, text: "[Scales squeaks happily]", alternates: { es: "[Scales chilla feliz]", fr: "[Scales couine de joie]" } }
+    - { id: sub_sin_07, start: 392, end: 396, text: "Scales! No!", alternates: { es: "¡Scales! ¡No!", fr: "Scales ! Non !" } }
+
+events:
+  - { id: evt_sin_001, ts: 0, type: scene, title: "Snowbound", text: "Sintel struggles alone through a snowstorm high in the mountains." }
+  - { id: evt_sin_002, ts: 15, type: trivia, importance: high, text: "Sintel was the Blender Foundation's third open movie (project 'Durian'), released in 2010." }
+  - { id: evt_sin_003, ts: 40, endTs: 880, type: character, characterId: c_sintel, text: "Sintel pushes on through the snow." }
+  - { id: evt_sin_004, ts: 90, type: scene, title: "Ambush in the snow", text: "Sintel is attacked in the mountains, fights back and collapses; she wakes in an old shaman's hut." }
+  - { id: evt_sin_005, ts: 120, endTs: 220, type: character, characterId: c_shaman, text: "The shaman tends to Sintel." }
+  - { id: evt_sin_006, ts: 150, type: glossary, term: Shaman, definition: "A healer or spiritual guide believed to connect with the spirit world." }
+  - { id: evt_sin_007, ts: 180, type: scene, title: "What are you looking for?", text: "The shaman asks what brings her to the land of the gatekeepers; Sintel says she is searching for a dragon." }
+  - id: evt_sin_008
+    ts: 193
+    endTs: 199
+    type: variation_point
+    variation:
+      id: v_sin_01
+      kind: subtitle
+      targetLineId: sub_sin_05
+      prompt: "Which phrasing for Sintel's answer?"
+      defaultOptionId: a
+      options:
+        - { id: a, label: "Original", text: "A dragon." }
+        - { id: b, label: "Possessive", text: "A dragon. Mine." }
+        - { id: c, label: "Wistful", text: "A dragon... my dragon." }
+  - { id: evt_sin_009, ts: 220, type: scene, title: "Flashback: Scales", text: "In a city, Sintel finds a baby dragon with an injured wing and nurses it back to health." }
+  - { id: evt_sin_010, ts: 230, endTs: 420, type: character, characterId: c_scales, text: "Scales, the baby dragon, appears in Sintel's memories." }
+  - { id: evt_sin_011, ts: 260, type: trivia, importance: high, text: "Sintel was directed by Colin Levy, with music composed by Jan Morgenstern." }
+  - { id: evt_sin_012, ts: 300, type: trivia, text: "The Durian project was used to stress-test Blender 2.5 while its interface and tools were being redesigned." }
+  - { id: evt_sin_013, ts: 330, type: scene, title: "Flying lessons", text: "Sintel teaches Scales to fly, and the two become inseparable." }
+  - { id: evt_sin_014, ts: 390, type: scene, title: "Taken", text: "An adult dragon swoops down and carries Scales away." }
+  - { id: evt_sin_015, ts: 395, endTs: 430, type: character, characterId: c_dragon, text: "An adult dragon dives at Sintel and Scales." }
+  - { id: evt_sin_016, ts: 420, type: glossary, term: Kindred spirit, definition: "Someone who shares your feelings and outlook - the shaman's phrase for who Sintel might be seeking." }
+  - { id: evt_sin_017, ts: 480, type: scene, title: "The long journey", text: "Sintel crosses deserts, forests and mountains, following the dragons' trail." }
+  - { id: evt_sin_018, ts: 600, type: scene, title: "The lair", text: "Sintel reaches the dragons' lair high in the mountains." }
+  - { id: evt_sin_019, ts: 700, endTs: 830, type: character, characterId: c_dragon, text: "The adult dragon confronts Sintel in its lair." }
+  - { id: evt_sin_020, ts: 720, type: scene, title: "Confrontation", text: "Sintel battles the dragon, and the ending reveals a heartbreaking truth about who it really is." }
+  - { id: evt_sin_021, ts: 780, type: trivia, text: "Like all Blender open movies, Sintel's production files were published so anyone can study how it was made." }
+  - id: evt_sin_022
+    ts: 830
+    endTs: 845
+    type: variation_point
+    variation:
+      id: v_sin_02
+      kind: scene
+      prompt: "Which closing card should the room see?"
+      defaultOptionId: a
+      options:
+        - { id: a, label: "Original", text: "(no closing card)" }
+        - { id: b, label: "Dedication", text: "For everyone who has ever had to let something go." }
+        - { id: c, label: "Map of the journey", text: "INSERT: a sketched map of Sintel's journey from the city to the lair." }
+  - { id: evt_sin_023, ts: 850, type: trivia, text: "Sintel is released under the Creative Commons Attribution 3.0 license." }

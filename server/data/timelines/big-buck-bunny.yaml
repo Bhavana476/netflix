@@ -1,0 +1,92 @@
+# Authored timeline for "Big Buck Bunny" (Blender Foundation, CC BY 3.0).
+# Timestamps are hand-authored approximations against the public sample video; see docs/evidence/trivia-qa.md.
+title:
+  id: t_1001
+  name: Big Buck Bunny
+  year: 2008
+  durationSeconds: 596
+  genres: [Animation, Comedy, Family]
+  tags: [open-movie, blender, animals, revenge, no-dialogue]
+  posterColor: "#5c8a2e"
+  synopsis: A gentle giant rabbit's peaceful morning is ruined by three rodent bullies - until he decides to fight back.
+  videoAssetUrl: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+
+characters:
+  - id: c_bunny
+    name: Big Buck Bunny
+    description: a large, good-natured rabbit who lives in a burrow under a tree and loves the quiet of the meadow
+  - id: c_frank
+    name: Frank
+    description: the leader of the three rodent bullies, a flying squirrel who can glide between trees
+  - id: c_rinky
+    name: Rinky
+    description: a red squirrel and one of the three bullies tormenting Bunny
+  - id: c_gimera
+    name: Gimera
+    description: a chinchilla, the smallest of the three bullies
+  - id: c_butterfly
+    name: The Butterflies
+    description: the delicate meadow butterflies that Bunny adores
+
+subtitles:
+  version: 1
+  defaultLocale: en
+  lines:
+    - { id: sub_bbb_01, start: 2, end: 7, text: "[Birds chirping]", alternates: { es: "[Pájaros cantando]", fr: "[Gazouillis d'oiseaux]", hi: "[चिड़ियों की चहचहाहट]" } }
+    - { id: sub_bbb_02, start: 42, end: 47, text: "[Bunny yawns and stretches]", alternates: { es: "[El conejo bosteza y se estira]", fr: "[Le lapin bâille et s'étire]" } }
+    - { id: sub_bbb_03, start: 95, end: 100, text: "[Bunny giggles at a butterfly]", alternates: { es: "[El conejo se ríe con una mariposa]", fr: "[Le lapin rit devant un papillon]" } }
+    - { id: sub_bbb_04, start: 172, end: 177, text: "[Rodents snickering]", alternates: { es: "[Los roedores se burlan]", fr: "[Les rongeurs ricanent]" } }
+    - { id: sub_bbb_05, start: 230, end: 236, text: "[Bunny sighs] Not again...", alternates: { es: "[El conejo suspira] Otra vez no...", fr: "[Le lapin soupire] Pas encore..." } }
+    - { id: sub_bbb_06, start: 322, end: 328, text: "[Wood scraping as Bunny sharpens a stick]", alternates: { es: "[Madera raspando: el conejo afila un palo]", fr: "[Bois raclé : le lapin taille un bâton]" } }
+    - { id: sub_bbb_07, start: 424, end: 429, text: "[Trap snaps shut]", alternates: { es: "[La trampa se cierra]", fr: "[Le piège se referme]" } }
+    - { id: sub_bbb_08, start: 505, end: 511, text: "[Peaceful music returns]", alternates: { es: "[Vuelve la música tranquila]", fr: "[La musique paisible revient]" } }
+
+events:
+  - { id: evt_bbb_001, ts: 0, type: scene, title: "Morning in the meadow", text: "Birds stir in the trees as morning comes to a sunlit forest meadow." }
+  - { id: evt_bbb_002, ts: 5, type: trivia, importance: high, text: "Big Buck Bunny was produced by the Blender Institute as open movie project 'Peach' and released in 2008." }
+  - { id: evt_bbb_003, ts: 20, type: trivia, text: "The film was made with free and open-source software, with Blender as the main 3D tool." }
+  - { id: evt_bbb_004, ts: 40, endTs: 560, type: character, characterId: c_bunny, text: "Bunny wakes up and squeezes out of his burrow beneath a tree." }
+  - { id: evt_bbb_005, ts: 70, type: glossary, term: Burrow, definition: "A hole or tunnel dug by a small animal, such as a rabbit, to live in." }
+  - { id: evt_bbb_006, ts: 90, type: scene, title: "Bunny greets the morning", text: "Bunny stretches, sniffs a flower and is delighted by a butterfly." }
+  - { id: evt_bbb_007, ts: 110, endTs: 260, type: character, characterId: c_butterfly, text: "A butterfly flutters around Bunny." }
+  - { id: evt_bbb_008, ts: 130, type: trivia, text: "Big Buck Bunny is released under a Creative Commons Attribution license, so anyone may reuse or remix it with credit." }
+  - { id: evt_bbb_009, ts: 150, endTs: 560, type: character, characterId: c_frank, text: "Frank watches Bunny from a branch." }
+  - { id: evt_bbb_010, ts: 155, endTs: 560, type: character, characterId: c_rinky, text: "Rinky joins Frank in the tree." }
+  - { id: evt_bbb_011, ts: 160, endTs: 560, type: character, characterId: c_gimera, text: "Gimera tags along with the other two bullies." }
+  - { id: evt_bbb_012, ts: 170, type: scene, title: "The bullies strike", text: "Frank, Rinky and Gimera tease Bunny, throwing fruit and nuts at him from the trees." }
+  - { id: evt_bbb_013, ts: 200, type: glossary, term: Flying squirrel, definition: "A squirrel with skin flaps between its legs that let it glide from tree to tree - which is how Frank swoops around." }
+  - id: evt_bbb_014
+    ts: 228
+    endTs: 236
+    type: variation_point
+    variation:
+      id: v_bbb_01
+      kind: subtitle
+      targetLineId: sub_bbb_05
+      prompt: "How should Bunny's sigh be captioned?"
+      defaultOptionId: a
+      options:
+        - { id: a, label: "Original", text: "[Bunny sighs] Not again..." }
+        - { id: b, label: "Exasperated", text: "[Bunny sighs] Seriously? Fruit? Again?" }
+        - { id: c, label: "Disappointed parent", text: "[Bunny sighs] I'm not mad. I'm just disappointed." }
+  - { id: evt_bbb_015, ts: 260, type: scene, title: "The last straw", text: "The bullies harm one of Bunny's beloved butterflies, and the gentle rabbit finally decides to fight back." }
+  - { id: evt_bbb_016, ts: 290, type: trivia, importance: high, text: "The Peach project was directed by Sacha Goedegebure." }
+  - { id: evt_bbb_017, ts: 320, type: scene, title: "Preparing the traps", text: "Bunny sharpens a stick, fashions a bow from a vine and builds hidden traps around the meadow." }
+  - { id: evt_bbb_018, ts: 340, type: glossary, term: Booby trap, definition: "A hidden device designed to catch or surprise whoever triggers it." }
+  - id: evt_bbb_019
+    ts: 380
+    endTs: 390
+    type: variation_point
+    variation:
+      id: v_bbb_02
+      kind: scene
+      prompt: "Add an insert card before the payback?"
+      defaultOptionId: a
+      options:
+        - { id: a, label: "Original cut", text: "(no insert)" }
+        - { id: b, label: "Battle map", text: "INSERT: Bunny's hand-drawn map of the meadow, every trap marked with a carrot." }
+        - { id: c, label: "To-do list", text: "INSERT: Bunny's to-do list - 1. Sharpen stick  2. Make bow  3. Payback" }
+  - { id: evt_bbb_020, ts: 420, type: scene, title: "Payback", text: "The rodents fall into Bunny's traps one after another; Frank glides straight into the final one." }
+  - { id: evt_bbb_021, ts: 450, type: trivia, text: "Peach was one of the Blender Foundation's 'open movie' projects: the production files were published alongside the film." }
+  - { id: evt_bbb_022, ts: 500, type: scene, title: "Peace restored", text: "Bunny is at peace in his meadow again, while Frank ends up tethered like a kite." }
+  - { id: evt_bbb_023, ts: 540, type: trivia, text: "The production was partly funded by DVD pre-sales to the Blender community, whose names appear in the credits." }
