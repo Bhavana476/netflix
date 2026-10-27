@@ -9,7 +9,7 @@ title:
   tags: [open-movie, blender, animals, revenge, no-dialogue]
   posterColor: "#5c8a2e"
   synopsis: A gentle giant rabbit's peaceful morning is ruined by three rodent bullies - until he decides to fight back.
-  videoAssetUrl: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+  videoAssetUrl: https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4
 
 characters:
   - id: c_bunny

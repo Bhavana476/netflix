@@ -9,7 +9,7 @@ title:
   tags: [open-movie, blender, robots, live-action, vfx, amsterdam]
   posterColor: "#2e4a6b"
   synopsis: In a robot-ravaged future Amsterdam, a team of warriors and scientists restages a breakup from the past to save the world.
-  videoAssetUrl: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4
+  videoAssetUrl: https://archive.org/download/Tears-of-Steel/tears_of_steel_720p.mp4
 
 characters:
   - id: c_thom

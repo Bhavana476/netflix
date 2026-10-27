@@ -8,20 +8,26 @@ const { User, Title, Interaction, WatchSpace, SessionEvent, RefreshToken, RecMod
 const engine = require('../src/ai/engine');
 const log = require('../src/logger');
 
-const V = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/';
+// Creative Commons Blender open movies on the Internet Archive. The Google sample bucket these
+// used to point at now returns 403, so placeholder catalog titles reuse these four films.
+const A = 'https://archive.org/download/';
+const BBB = [A + 'BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4', 596];
+const SINTEL = [A + 'Sintel/sintel-2048-surround_512kb.mp4', 888];
+const ED = [A + 'ElephantsDream/ed_1024_512kb.mp4', 653];
+const TOS = [A + 'Tears-of-Steel/tears_of_steel_720p.mp4', 734];
 const VIDEOS = {
-  ed: [V + 'ElephantsDream.mp4', 653],
-  fun: [V + 'ForBiggerFun.mp4', 60],
-  blazes: [V + 'ForBiggerBlazes.mp4', 15],
-  escapes: [V + 'ForBiggerEscapes.mp4', 15],
-  joy: [V + 'ForBiggerJoyrides.mp4', 15],
-  melt: [V + 'ForBiggerMeltdowns.mp4', 15],
-  subaru: [V + 'SubaruOutbackOnStreetAndDirt.mp4', 594],
-  gti: [V + 'VolkswagenGTIReview.mp4', 579],
-  bullrun: [V + 'WeAreGoingOnBullrun.mp4', 47],
-  grand: [V + 'WhatCarCanYouGetForAGrand.mp4', 609],
-  bbb: [V + 'BigBuckBunny.mp4', 596],
-  sintel: [V + 'Sintel.mp4', 888],
+  ed: ED,
+  fun: BBB,
+  blazes: TOS,
+  escapes: TOS,
+  joy: TOS,
+  melt: TOS,
+  subaru: ED,
+  gti: ED,
+  bullrun: SINTEL,
+  grand: ED,
+  bbb: BBB,
+  sintel: SINTEL,
 };
 
 // [id, name, year, genres, tags, video, color, synopsis]

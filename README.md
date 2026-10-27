@@ -57,7 +57,7 @@ If a `SEED_*` variable is empty, the seed script generates a random password and
 - **Docker:** `docker compose up --build`, then open http://localhost:4000. This uses MongoDB 7 plus the app image. *Note: the Dockerfile and compose file are provided but were not run on the build machine, which had no Docker.*
 
 ### Video
-Titles stream the public Creative Commons sample clips hosted at `commondatastorage.googleapis.com` (Big Buck Bunny, Sintel, Tears of Steel, and others), so the browser needs internet access. To run fully offline, put `.mp4` files in `server/media/` and set `videoAssetUrl: /media/<file>.mp4` in a timeline upload.
+Titles stream the Creative Commons Blender open movies (Big Buck Bunny, Sintel, Tears of Steel, Elephants Dream) from `archive.org`; placeholder catalog titles reuse these films. (The Google sample bucket used originally now returns 403.), so the browser needs internet access. To run fully offline, put `.mp4` files in `server/media/` and set `videoAssetUrl: /media/<file>.mp4` in a timeline upload.
 
 ### Optional: hosted LLM for the co-pilot
 Set `ANTHROPIC_API_KEY` (model `AI_MODEL`, default `claude-haiku-5-5`). The model only sees the retrieved timeline entries and must return the IDs of the entries it used; the server drops any ID it didn't retrieve. Without a key, or if the call fails or takes longer than `AI_TIMEOUT_MS`, a deterministic **extractive** answerer builds the answer directly from the cited entries. Both modes return the same payload. The extractive mode is the default because it is fully verifiable and needs no account.

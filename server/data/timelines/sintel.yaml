@@ -9,7 +9,7 @@ title:
   tags: [open-movie, blender, dragons, quest, bittersweet]
   posterColor: "#7a3b2e"
   synopsis: A lone young woman braves snow, desert and danger to find the baby dragon she once rescued.
-  videoAssetUrl: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4
+  videoAssetUrl: https://archive.org/download/Sintel/sintel-2048-surround_512kb.mp4
 
 characters:
   - id: c_sintel
