@@ -1,5 +1,7 @@
 const express = require('express');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const { config } = require('../config');
 const { User } = require('../models');
 const { issueTokens, rotateRefresh, revokeRefresh, requireAuth } = require('../auth');
 const { HttpError, sanitizeText, asyncRoute } = require('../util');
@@ -44,6 +46,35 @@ router.get('/me', requireAuth, asyncRoute(async (req, res) => {
   const user = await User.findById(req.user.id);
   if (!user) throw new HttpError(404, 'NOT_FOUND', 'User not found');
   res.json({ user: user.toPublic() });
+}));
+
+// Viewer -> host upgrade gated by HOST_ACCESS_CODE. Attempts are limited per user (in memory,
+// fine for the single-process deployment) so the code can't be brute-forced.
+const HOST_CODE_MAX_ATTEMPTS = 5;
+const HOST_CODE_WINDOW_MS = 15 * 60 * 1000;
+const hostCodeAttempts = new Map();
+const sha = (s) => crypto.createHash('sha256').update(String(s)).digest();
+
+router.post('/host-code', requireAuth, asyncRoute(async (req, res) => {
+  if (!config.hostAccessCode) throw new HttpError(503, 'HOST_CODE_DISABLED', 'Host access codes are not enabled on this server');
+  const now = Date.now();
+  const a = hostCodeAttempts.get(req.user.id);
+  const recent = a && now - a.first < HOST_CODE_WINDOW_MS ? a : { first: now, count: 0 };
+  if (recent.count >= HOST_CODE_MAX_ATTEMPTS) throw new HttpError(429, 'TOO_MANY_ATTEMPTS', 'Too many wrong codes. Try again in 15 minutes');
+  const { code } = req.body || {};
+  if (typeof code !== 'string' || !crypto.timingSafeEqual(sha(code.trim()), sha(config.hostAccessCode))) {
+    hostCodeAttempts.set(req.user.id, { ...recent, count: recent.count + 1 });
+    throw new HttpError(403, 'INVALID_HOST_CODE', 'That host code is not valid');
+  }
+  hostCodeAttempts.delete(req.user.id);
+  const user = await User.findById(req.user.id);
+  if (!user) throw new HttpError(404, 'NOT_FOUND', 'User not found');
+  if (user.role === 'viewer') {
+    user.role = 'host';
+    await user.save();
+  }
+  // Fresh tokens so the new role is in the JWT immediately (REST and socket handshake).
+  res.json({ user: user.toPublic(), ...(await issueTokens(user)) });
 }));
 
 router.patch('/me/preferences', requireAuth, asyncRoute(async (req, res) => {

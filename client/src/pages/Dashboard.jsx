@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { api, fmtTime } from '../api';
+import { api, fmtTime, setSession } from '../api';
 
 function Poster({ t, children, onClick }) {
   return (
@@ -76,16 +76,58 @@ function CreateRoomModal({ title, onClose }) {
   );
 }
 
-// Opened for every role: a solo preview plus details. Only host/admin get the Watch Space action.
+const PREVIEW_LIMIT_SEC = 60;
+
+// Viewer -> host upgrade. The server checks the code and returns tokens carrying the new role.
+function HostCodeForm() {
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const submit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setBusy(true);
+    try {
+      const r = await api('/auth/host-code', { method: 'POST', body: { code } });
+      setSession({ user: r.user, accessToken: r.accessToken, refreshToken: r.refreshToken });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <form className="host-code" onSubmit={submit}>
+      <label>Host code<span className="muted small"> · unlocks the full film and hosting</span>
+        <div className="row-inline">
+          <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="e.g. HOST-XXXXXX" autoComplete="off" maxLength={64} required />
+          <button className="btn primary" disabled={busy}>{busy ? 'Checking…' : 'Unlock'}</button>
+        </div>
+      </label>
+      {error && <div className="error">{error}</div>}
+    </form>
+  );
+}
+
+// Opened for every role. Viewers get a capped preview; host/admin watch in full and can start a Watch Space.
 function TitleModal({ title, canHost, onStart, onClose }) {
+  const [capped, setCapped] = useState(false);
+  const limit = (e) => {
+    if (canHost || e.target.currentTime < PREVIEW_LIMIT_SEC) return;
+    e.target.pause();
+    e.target.currentTime = PREVIEW_LIMIT_SEC;
+    setCapped(true);
+  };
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal title-modal" onClick={(e) => e.stopPropagation()}>
-        <video className="preview" src={title.videoAssetUrl} controls autoPlay playsInline />
+        <video className="preview" src={title.videoAssetUrl} controls autoPlay playsInline onTimeUpdate={limit} onSeeking={limit} />
+        {!canHost && <HostCodeForm />}
+        {!canHost && <p className={capped ? 'error' : 'muted small'}>{capped ? 'Preview ended. ' : `Viewers can preview the first ${PREVIEW_LIMIT_SEC} seconds. `}Enter a host code above to watch the whole film, or join a host's room with an invite code.</p>}
+        {canHost && <p className="muted small">Full film unlocked.</p>}
         <h2>{title.name}</h2>
         <div className="muted small">{[title.year, (title.genres || []).join(', '), title.durationSeconds && fmtTime(title.durationSeconds)].filter(Boolean).join(' · ')}</div>
         {title.synopsis && <p>{title.synopsis}</p>}
-        {!canHost && <p className="muted small">To watch together, ask a host for an invite code and enter it in <b>Join</b>.</p>}
         <div className="modal-actions">
           <button type="button" className="btn ghost" onClick={onClose}>Close</button>
           {canHost && <button type="button" className="btn primary" onClick={onStart}>Start a Watch Space</button>}

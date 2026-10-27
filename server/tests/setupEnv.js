@@ -6,4 +6,5 @@ process.env.SEED_ON_BOOT = 'false';
 process.env.HOST_GRACE_MS = '400';
 process.env.RECONNECT_GRACE_MS = '400';
 process.env.CHAT_FLUSH_MS = '50';
+process.env.HOST_ACCESS_CODE = 'TEST-HOST-CODE';
 require('../src/mongoBinary').useCachedMongoBinary();

@@ -145,3 +145,41 @@ describe('host-only actions', () => {
     h.close();
   });
 });
+
+describe('host access code', () => {
+  const upgrade = (u, code) => t.http().post('/api/v1/auth/host-code').set(auth(u)).send({ code });
+
+  test('requires authentication', async () => {
+    expect((await t.http().post('/api/v1/auth/host-code').send({ code: 'TEST-HOST-CODE' })).status).toBe(401);
+  });
+
+  test('a wrong code is rejected and the viewer stays a viewer', async () => {
+    const u = await makeUser(t, 'viewer');
+    const res = await upgrade(u, 'WRONG');
+    expect(res.status).toBe(403);
+    expect(res.body.error.code).toBe('INVALID_HOST_CODE');
+    expect((await t.http().post('/api/v1/watch-spaces').set(auth(u)).send({ titleId })).status).toBe(403);
+  });
+
+  test('the right code promotes to host and the new token can create a Watch Space', async () => {
+    const u = await makeUser(t, 'viewer');
+    const res = await upgrade(u, 'TEST-HOST-CODE');
+    expect(res.status).toBe(200);
+    expect(res.body.user.role).toBe('host');
+    expect(jwt.decode(res.body.accessToken).role).toBe('host');
+    const created = await t.http().post('/api/v1/watch-spaces').set('Authorization', `Bearer ${res.body.accessToken}`).send({ titleId });
+    expect(created.status).toBe(201);
+  });
+
+  test('attempts are rate-limited per user', async () => {
+    const u = await makeUser(t, 'viewer');
+    for (let i = 0; i < 5; i++) expect((await upgrade(u, `bad-${i}`)).status).toBe(403);
+    expect((await upgrade(u, 'TEST-HOST-CODE')).status).toBe(429);
+  });
+
+  test('does not demote an admin', async () => {
+    const res = await upgrade(admin, 'TEST-HOST-CODE');
+    expect(res.status).toBe(200);
+    expect(res.body.user.role).toBe('admin');
+  });
+});

@@ -21,6 +21,9 @@ const config = {
   accessTtlSec: num('ACCESS_TOKEN_TTL_SEC', 900),
   refreshTtlSec: num('REFRESH_TOKEN_TTL_SEC', 7 * 24 * 3600),
 
+  // Shared secret a viewer enters to be promoted to host. Empty disables the upgrade.
+  hostAccessCode: env('HOST_ACCESS_CODE', ''),
+
   anthropicApiKey: env('ANTHROPIC_API_KEY', ''),
   aiModel: env('AI_MODEL', 'claude-haiku-5-5'),
   aiTimeoutMs: num('AI_TIMEOUT_MS', 2500),
